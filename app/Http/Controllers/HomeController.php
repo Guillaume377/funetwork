@@ -13,16 +13,21 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // seuls les invités non-connectés peuvent voir l'index (inscription  connexion)
+        $this->middleware('guest')->only('index');
+
+        // seuls les visiteurs connectés peuvent voir la liste des messages
+        $this->middleware('auth')->only('home');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        return view('home');
+    public function index() // renvoyer la page d'accueil du site (inscription + connexion)
+    {                       // index.blade.php
+        return view('index');
     }
+
+    public function home() // renvoyer la page home.blade.php avec tous les messages
+    {
+        return view ('home');
+    }
+
 }

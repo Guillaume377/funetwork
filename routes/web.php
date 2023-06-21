@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,11 +13,28 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// ***************************** page de connexion / inscription ********************************* */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route:: méthode http ( url, [ emplacement du contrôleur concerné, méthode du ctrl concerné ])-> nom de la route
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+
+
+// ***************************** ACCUEIL (home.blade.php)/ liste des messages ********************* */
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
+
+
+//*******************************routes AUTHENTIFICATION (Laravel UI) ***************************** */
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::get('/', function () {
+    return view('index');
+});
+
+
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('/users', App\Http\Controllers\UserController::class)->except('index', 'create', 'store');
