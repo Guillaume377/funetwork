@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Mail\Mailables\Content;
+use App\Models\Comment;
 
 class HomeController extends Controller
 {
@@ -22,7 +24,13 @@ class HomeController extends Controller
 
     public function index() // renvoyer la page d'accueil du site (inscription + connexion)
     {                       // index.blade.php
-        return view('index');
+
+        $content = Comment::with(['user', 'comments'])
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(10);
+
+    return view('home', ['content' => $content]);
+      
     }
 
     public function home() // renvoyer la page home.blade.php avec tous les messages

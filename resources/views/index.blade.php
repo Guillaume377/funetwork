@@ -12,7 +12,7 @@
                 <a href="register"><button class="btn btn-lg px-5 btn-primary">Inscription</button></a>
             </div>
             <div class="col-6">
-                <a href="login"><button class="btn btn-lg px-5 btn-primary">Inscription</button></a>
+                <a href="login"><button class="btn btn-lg px-5 btn-primary">Connexion</button></a>
             </div>
         </div>
         

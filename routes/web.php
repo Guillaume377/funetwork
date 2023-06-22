@@ -29,12 +29,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name(
 Auth::routes();
 
 
-
-Route::get('/', function () {
-    return view('index');
-});
-
-
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// ****************************** route resource USERS ***************************************** */
 Route::resource('/users', App\Http\Controllers\UserController::class)->except('index', 'create', 'store');
+
+
+//******************************* route resource POSTS *************************************** */
+Route::resource('/post', App\Http\Controllers\PostController::class)->except('index', 'create', 'show');

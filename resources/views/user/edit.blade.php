@@ -12,6 +12,7 @@
         <h3 class="pb-3">Modifier mes informations </h3>
         <div class="row">
 
+            <img class="w-25" src="{{ asset('images/' . $user->image) }} " alt="image_utilisateur">  
             <form class="col-4 mx-auto" action="{{ route('users.update', $user) }}" method="POST">
                 @csrf
                 @method('PUT')
@@ -32,7 +33,7 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </form>
 
-            <form class= "d-flex justify-content-center" action="{{route('users.destroy', $user)}}" method="post">
+            <form class= "d-flex justify-content-center ms-4" action="{{route('users.destroy', $user)}}" method="post">
                 @csrf
                 @method("delete")
                 <button type="submit" class="btn btn-danger">supprimer le compte</button>

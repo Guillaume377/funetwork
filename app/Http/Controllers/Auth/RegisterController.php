@@ -67,7 +67,7 @@ class RegisterController extends Controller
     {
         return User::create([
             'pseudo' => $data['pseudo'],
-            'image' => isset($date['image']) ? $data['image'] : null,
+            'image' => isset($data['image']) ? $data['image'] : null,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
