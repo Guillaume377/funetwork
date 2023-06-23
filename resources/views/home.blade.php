@@ -1,62 +1,134 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="container">
+        <div class="row justify-content-center text-center">
 
-//************************************************ formulaire message ************************************* -->
+            {{-- @if (Route::currentRouteName() == 'search')
+                <h1 class="m-5">Résultats de la recherche</h1>
+            @else --}}
+            <h1 class="m-5"> Accueil / liste de messages</h1>
 
-<form action="{{ route('post.store') }}" method="post">
-    {{ csrf_field() }}
+            <h2 class="m-5"> Poster un message</h2>
 
-    <div class="field">
-        <label class="label">Message</label>
-        <div class="control">
-            <textarea class="textarea" name="content" placeholder="Ecrivez votre message"></textarea>
+            <!--********************************************** formulaire ajout message *************************************-->
+
+            <form action="{{ route('post.store') }}" method="post" class="message w-75 mx-auto">
+                @csrf
+
+                <!-- ******************************************* input content **********************************************-->
+
+                <div class="row mb-3">
+                    <i class="fas fa-pen-fancy text-primary fa-2x me-2"></i>
+                    <label for="content">écris ton message</label>
+                    <textarea required class="container-fluid mt-2" type="text" name="content" id="content" placeholder="Salut !"></textarea>
+
+                    @error('content')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+
+                <!-- ******************************************** input tags **********************************************-->
+
+                <div class="row mb-3">
+                    <label for="tags" class="col-md-4 col-form-label text-md-end">tags</label>
+
+                    <div class="col-md-6">
+                        <input id="tags" type="text" class="form-control @error('tags') is-invalid @enderror"
+                            name="tags" placeholder="bonjour hello" required autofocus>
+
+                        @error('tags')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <!-- ******************************************** input image **********************************************-->
+
+                <div class="row mb-3">
+                    <label for="image" class="col-md-4 col-form-label text-md-end">{{ _('image') }}</label>
+
+                    <div class="col-md-6">
+                        <input id="image" type="text" class="form-control @error('image') is-invalid @enderror"
+                            name="image" placeholder="image.jpg" autocomplete="image" autofocus>
+
+                        @error('image')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <!-- ******************************************** bouton Valider **********************************************-->
+
+                <button type="submit" class="btn btn-primary">Valider</button>
+
+            </form>
+
+
+            <h2 class="m-5">Liste des messages</h2>
+
+            <!-- s'il y a des résultats pour la recherche => message qui informe l'utilisateur -->
+
+            {{-- @if (count($posts) == 0)
+                <p>Aucun résultat pour votre recherche</p>
+            @else --}}
+            <!-- s'il y a des résultats => foreach classique -->
+
+
+            <!-- *************************************** Boucle qui affiche les messages ***********************************************-->
+            @foreach ($posts as $post)
+                <div class="card text-bg-primary mb-3">
+                    posté par {{ $post->user->pseudo }}
+                    <div class="card-header row">
+                        <img class="photo_user" src="{{ asset('images/' . $post->image) }} " alt="imagePost">
+                        <div class="col-6">
+                            {{ $post->tags }}
+                        </div>
+                        <div class="col-md-6">
+                            posté il y a {{ $post->created_at->diffForHumans() }}
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class=""></h5>
+                        <div class="col-md-3">
+
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
+
+            <!-- *************************************** Bouton modifier => mène à la page de modification du message ***********************************************-->
+
+            {{-- @can('update', $post) --}}
+            <a href="{{ route('post.edit', $post) }}">
+                <button class="btn btn-info">Modifier</button>
+            </a>
+            {{-- @endcan --}}
+
+            <!-- ********************************************************* Bouton supprimer **************************************************-->
+
+            {{-- @can('delete', $post) --}}
+            {{-- <div class="container text-center mt-5">
+                    <form action="{{ route('comments.detroy', $comment) }}" méthod="POST">
+                        @csrf
+                        @method ('DELETE')
+                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                    </form>
+                </div> --}}
+            {{-- @endcan --}}
+
+
+            <!-- Pagination -->
+            {{ $posts->links() }}
         </div>
-        @if ($errors->has('content'))
-            <p class="help is-danger">{{ $errors->first('content') }}</p>
-        @endif
-
-        <div class="control">
-            <input type="text" name="image">
-        </div>
-        @if ($errors->has('image'))
-            <p class="help is-danger">{{ $errors->first('image') }}</p>
-        @endif
-
-        <div class="control">
-            <input type="text" name="tags">
-        </div>
-        @if ($errors->has('tags'))
-            <p class="help is-danger">{{ $errors->first('tags') }}</p>
-        @endif
-
-    </div>
-
-    
-        <div class="container">
-             @foreach ($contents as $content)
-                 <div class="message">
-                     <h2>{{ $content->title }}</h2>
-                     <p>{{ $content->content }}</p>
-                     <p>Posted by: {{ $content->user->name }}</p>
-
-                     <h3>Comments:</h3>
-                    @foreach ($content->comments as $comment)
-                         <p>{{ $comment->content }}</p>
-                       <p>Comment by: {{ $comment->user->name }}</p>
-                     @endforeach
-                 </div>
-             @endforeach
-
-             <div class="field">
-                 <div class="control">
-                     <button class="button is-link" type="submit">Publier</button>
-                 </div>
-             </div>
-    </form>
-
-
-    <!-- Pagination -->
-     {{ $contents->links() }}
     </div>
 @endsection

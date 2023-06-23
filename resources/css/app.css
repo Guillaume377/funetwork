@@ -1,0 +1,15 @@
+.message{
+    background-color: blue;
+    border-radius: 50%;
+    
+}
+
+.card-header{
+    background-color: darkorange;
+
+}
+
+.photo_user{
+    width:10%;
+    border-radius: 50%;
+}

@@ -11,6 +11,13 @@ class Post extends Model
 
     // je charge automatiquement l'utilisateur à chaque fois que je récupère un message
     protected $with = ['user'];
+
+    protected $fillable = [
+        'content',
+        'tags',
+        'image',
+        'user_id',
+    ];
     
     // nom de la fonction au singulier car 1 seul user en relation
     // cardinalité 1,1
