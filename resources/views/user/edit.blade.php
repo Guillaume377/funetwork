@@ -7,9 +7,9 @@
 @section('content')
     <main class="container">
 
-        <h1>Mon compte</h1>
+        <h1 class="text-center m-5">Mon compte</h1>
 
-        <h3 class="pb-3">Modifier mes informations </h3>
+        <h3 class="pb-3 text-center m-5">Modifier mes informations </h3>
         <div class="row">
 
             <img class="w-25" src="{{ asset('images/' . $user->image) }} " alt="image_utilisateur">  
@@ -36,7 +36,7 @@
             <form class= "d-flex justify-content-center ms-4" action="{{route('users.destroy', $user)}}" method="post">
                 @csrf
                 @method("delete")
-                <button type="submit" class="btn btn-danger">supprimer le compte</button>
+                <button type="submit" class="ms-3 btn btn-danger">supprimer le compte</button>
             </form>
         </div>
     </main>

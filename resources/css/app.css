@@ -1,15 +1,27 @@
+
+
+
+
+/******** HOME.BLADE.PHP *******/
+
 .message{
-    background-color: blue;
-    border-radius: 50%;
-    
+    background-color:darkorange;
+    border-radius: 50%; 
 }
 
+#content {
+    width:60%;
+}
+
+.valider {
+    border-radius: 50%;
+}
 .card-header{
     background-color: darkorange;
-
 }
 
 .photo_user{
     width:10%;
     border-radius: 50%;
 }
+

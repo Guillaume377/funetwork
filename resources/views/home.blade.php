@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+<!--icon-->
+<script src="https://kit.fontawesome.com/826eec2b4c.js" crossorigin="anonymous"></script>
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center text-center">
@@ -7,9 +10,9 @@
             {{-- @if (Route::currentRouteName() == 'search')
                 <h1 class="m-5">Résultats de la recherche</h1>
             @else --}}
-            <h1 class="m-5"> Accueil / liste de messages</h1>
+            <h1 class="m-5">Accueil / liste de messages</h1>
 
-            <h2 class="m-5"> Poster un message</h2>
+            <h2 class="m-5">Poster un message</h2>
 
             <!--********************************************** formulaire ajout message *************************************-->
 
@@ -20,7 +23,7 @@
 
                 <div class="row mb-3">
                     <i class="fas fa-pen-fancy text-primary fa-2x me-2"></i>
-                    <label for="content">écris ton message</label>
+                    <label for="content">Ecris ton message</label>
                     <textarea required class="container-fluid mt-2" type="text" name="content" id="content" placeholder="Salut !"></textarea>
 
                     @error('content')
@@ -34,7 +37,7 @@
                 <!-- ******************************************** input tags **********************************************-->
 
                 <div class="row mb-3">
-                    <label for="tags" class="col-md-4 col-form-label text-md-end">tags</label>
+                    <label for="tags" class="col-md-4 col-form-label text-md-end"><i class="fa-solid fa-hashtag text-primary fa-2x me-2"></i></label>
 
                     <div class="col-md-6">
                         <input id="tags" type="text" class="form-control @error('tags') is-invalid @enderror"
@@ -67,7 +70,7 @@
 
                 <!-- ******************************************** bouton Valider **********************************************-->
 
-                <button type="submit" class="btn btn-primary">Valider</button>
+                <button type="submit" class=" valider btn btn-primary"><i class="fa-sharp fa-regular fa-circle-envelope"></i>Valider</button>
 
             </form>
 
