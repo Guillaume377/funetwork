@@ -30,9 +30,13 @@
                         value="{{ $user->image }}" id="image">
                 </div>
 
+                
+                <!-- ********************** bouton valider ********************* -->
                 <button type="submit" class="btn btn-primary">Valider</button>
             </form>
 
+
+                <!-- ********************** bouton supprimer le compte ********************* -->
             <form class= "d-flex justify-content-center ms-4" action="{{route('users.destroy', $user)}}" method="post">
                 @csrf
                 @method("delete")

@@ -2,7 +2,7 @@
 
 
 
-/******** HOME.BLADE.PHP *******/
+/******** HOME.BLADE.PHP/resources *******/
 
 .message{
     background-color:darkorange;
@@ -25,3 +25,14 @@
     border-radius: 50%;
 }
 
+
+/******** EDIT.BLADE.PHP/post *******/
+
+.modifpost {
+    background-color: darkorange;
+    border-radius: 50%;
+}
+
+.validermodif {
+    width:20%;
+}

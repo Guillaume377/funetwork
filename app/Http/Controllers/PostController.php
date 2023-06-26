@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 
+
 class PostController extends Controller
 {
     /**
@@ -48,24 +49,46 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Post $post)
     {
-        //
+        return view('post/edit', ['post' => $post]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            'content' => 'required|max:1000',
+            'tags' => 'required|max:50',
+            'image' => 'nullable|string'
+        ]);
+
+        //on modifie les infos de l'utilisateur
+        $post->content = $request->input('content');
+        $post->tags = $request->input('tags');
+        $post->image = $request->input('image');
+
+        //on sauvegarde les changements en bdd
+        $post->save();
+
+        //on redirige sur la page précédente
+        return redirect()->route('home')-> with('message', 'Le message a bien été modifié');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
-        //
+        //on vérifie que c'est bien l'utilisateur connecté qui fait la demande de suppression
+        // ()les id doivent être identique)
+        if (Auth::user()->id == $post->user_id) {
+            $post->delete();
+            return redirect()->route('home')->with('post', 'Le post a bien été supprimé');
+        }else{
+            return redirect()->back()->withErrors(['erreur' => 'suppression du post impossible']);
+        }
     }
 }

@@ -37,7 +37,8 @@
                 <!-- ******************************************** input tags **********************************************-->
 
                 <div class="row mb-3">
-                    <label for="tags" class="col-md-4 col-form-label text-md-end"><i class="fa-solid fa-hashtag text-primary fa-2x me-2"></i></label>
+                    <label for="tags" class="col-md-4 col-form-label text-md-end"><i
+                            class="fa-solid fa-hashtag text-primary fa-2x me-2"></i></label>
 
                     <div class="col-md-6">
                         <input id="tags" type="text" class="form-control @error('tags') is-invalid @enderror"
@@ -70,7 +71,8 @@
 
                 <!-- ******************************************** bouton Valider **********************************************-->
 
-                <button type="submit" class=" valider btn btn-primary"><i class="fa-sharp fa-regular fa-circle-envelope"></i>Valider</button>
+                <button type="submit" class=" valider btn btn-primary"><i
+                        class="fa-sharp fa-regular fa-circle-envelope"></i>Valider</button>
 
             </form>
 
@@ -100,34 +102,44 @@
                     </div>
 
                     <div class="card-body">
-                        <h5 class=""></h5>
-                        <div class="col-md-3">
+                        <p>{{ $post->content }}</p>
 
-                        </div>
+                    </div>
+                   
+                </div>
+
+                <!-- *************************************** Bouton modifier => mène à la page de modification du message ***********************************************-->
+                <div class="row col-6">
+                    {{-- @can('update', $post) --}}
+                    <a href="{{ route('post.edit', $post) }}">
+                        <button class="btn btn-info">Modifier</button>
+                    </a>
+                </div>
+                {{-- @endcan --}}
+
+                <!-- ********************************************************* Bouton supprimer **************************************************-->
+                <div class="row col-6">
+                    {{-- @can('delete', $post) --}}
+                    <div class="container text-center">
+                        <form action="{{ route('post.destroy', $post) }}" method="POST">
+                            @csrf
+                            @method ('DELETE')
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
                     </div>
                 </div>
+                {{-- @endcan --}}
+
+                <!-- ********************************************************* Ajout commentaires **************************************************-->
+                
+                {{-- @foreach ($comments as $comment)
+                <form action="{{ route('post.store') }}" method="post" class="message w-75 mx-auto">
+                    @csrf
+                </form>
+                @endforeach --}}
+
             @endforeach
 
-
-            <!-- *************************************** Bouton modifier => mène à la page de modification du message ***********************************************-->
-
-            {{-- @can('update', $post) --}}
-            <a href="{{ route('post.edit', $post) }}">
-                <button class="btn btn-info">Modifier</button>
-            </a>
-            {{-- @endcan --}}
-
-            <!-- ********************************************************* Bouton supprimer **************************************************-->
-
-            {{-- @can('delete', $post) --}}
-            {{-- <div class="container text-center mt-5">
-                    <form action="{{ route('comments.detroy', $comment) }}" méthod="POST">
-                        @csrf
-                        @method ('DELETE')
-                        <button type="submit" class="btn btn-danger">Supprimer</button>
-                    </form>
-                </div> --}}
-            {{-- @endcan --}}
 
 
             <!-- Pagination -->
