@@ -71,8 +71,7 @@
 
                 <!-- ******************************************** bouton Valider **********************************************-->
 
-                <button type="submit" class=" valider btn btn-primary"><i
-                        class="fa-sharp fa-regular fa-circle-envelope"></i>Valider</button>
+                <button type="submit" class=" valider btn btn-primary"></i>Valider</button>
 
             </form>
 
@@ -90,26 +89,43 @@
             <!-- *************************************** Boucle qui affiche les messages ***********************************************-->
             @foreach ($posts as $post)
                 <div class="card text-bg-primary mb-3">
-                    posté par {{ $post->user->pseudo }}
                     <div class="card-header row">
-                        <img class="photo_user" src="{{ asset('images/' . $post->image) }} " alt="imagePost">
-                        <div class="col-6">
+                        <div class="d-flex flex-column align-items-center col-4">
+                            <img class="photo_user" src="images/{{ $post->user->image }} " alt="image profil">
+                            posté par {{ $post->user->pseudo }}
+                        </div>
+
+                        <div class="col-4">
                             {{ $post->tags }}
                         </div>
-                        <div class="col-md-6">
-                            posté il y a {{ $post->created_at->diffForHumans() }}
+                        <div class="col-md-4 d-flex justify-content-around">
+                            posté {{ $post->created_at->diffForHumans() }}
+                            @if ($post->created_at != $post->updated_at)
+                                <div class="row">modifié {{ $post->updated_at->diffForHumans() }}</div>
+                            @endif
                         </div>
                     </div>
 
                     <div class="card-body">
                         <p>{{ $post->content }}</p>
-
+                        <img class="photo_user" src="images/{{ $post->image }} " alt="image du post">
                     </div>
-                   
+
+                </div>
+
+
+                <!-- *************************************** Bouton commenter => mène à la page commentaire ***********************************************-->
+                <div class="row col-4">
+                    <div class="container">
+                        <button class=" commenter btn btn-warning"
+                            onclick="document.getElementById('formulairecommentaire{{ $post->id }}').style.display = 'block'">
+                            Commenter
+                        </button>
+                    </div>
                 </div>
 
                 <!-- *************************************** Bouton modifier => mène à la page de modification du message ***********************************************-->
-                <div class="row col-6">
+                <div class="row col-4">
                     {{-- @can('update', $post) --}}
                     <a href="{{ route('post.edit', $post) }}">
                         <button class="btn btn-info">Modifier</button>
@@ -118,7 +134,7 @@
                 {{-- @endcan --}}
 
                 <!-- ********************************************************* Bouton supprimer **************************************************-->
-                <div class="row col-6">
+                <div class="row col-4">
                     {{-- @can('delete', $post) --}}
                     <div class="container text-center">
                         <form action="{{ route('post.destroy', $post) }}" method="POST">
@@ -130,15 +146,138 @@
                 </div>
                 {{-- @endcan --}}
 
-                <!-- ********************************************************* Ajout commentaires **************************************************-->
-                
-                {{-- @foreach ($comments as $comment)
-                <form action="{{ route('post.store') }}" method="post" class="message w-75 mx-auto">
-                    @csrf
-                </form>
-                @endforeach --}}
+                <!--********************************************** formulaire ajout commentaire *************************************-->
 
+
+                <div style="display:none" class="col p-3 mb-2" id="formulairecommentaire{{ $post->id }}">
+                    <form action="{{ route('comment.store') }}" method="POST" class="commentaire w-50 mx-auto">
+                        @csrf
+                        <input type="hidden" name="post_id" value="{{ $post->id }}">
+
+                        <!-- ******************************************* input content commentaire **********************************************-->
+
+                        <div class="row mb-3">
+                            <i class="fas fa-pen-fancy text-primary fa-2x me-2"></i>
+                            <label for="content">Ecris ton commentaire</label>
+                            <textarea required class="container-fluid mt-2" type="text" name="content" id="content" placeholder="Salut !"></textarea>
+
+                            @error('content')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+
+                        <!-- ******************************************** input tags commentaire **********************************************-->
+
+                        <div class="row mb-3">
+                            <label for="tags" class="col-md-4 col-form-label text-md-end"><i
+                                    class="fa-solid fa-hashtag text-primary fa-2x me-2"></i></label>
+
+                            <div class="col-md-6">
+                                <input id="tags" type="text"
+                                    class="form-control @error('tags') is-invalid @enderror" name="tags"
+                                    placeholder="bonjour hello" required autofocus>
+
+                                @error('tags')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <!-- ******************************************** input image commentaire**********************************************-->
+
+                        <div class="row mb-3">
+                            <label for="image" class="col-md-4 col-form-label text-md-end">{{ _('image') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="image" type="text"
+                                    class="form-control @error('image') is-invalid @enderror" name="image"
+                                    placeholder="image.jpg" autocomplete="image" autofocus>
+
+                                @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <button class="btn btn-danger"
+                            onclick="document.getElementById('formulairecommentaire{{ $post->id }}').style.display = 'none'">
+                            Annuler
+                        </button> {{-- masquer le formulaire de commentaire --}}
+
+                        <button type="submit" class=" valider btn btn-primary"></i>Valider</button>
+                </div>
+                </form>
+
+
+                <!-- ******************************************** affichage commentaire**********************************************-->
+
+                @foreach ($post->comments as $comment)
+                    <div class="card w-50 bg-warning mb-3">
+                        <div class="card-header row">
+                            <div class="d-flex flex-column align-items-center col-4">
+                                <img class="photo_user" src="{{ asset('images/' . $comment->image) }} " alt="imagePost">
+                                posté par {{ $comment->user->pseudo }}
+                            </div>
+
+                            <div class="col-4">
+                                {{ $comment->tags }}
+                            </div>
+
+                            <div class="col-md-4 d-flex justify-content-around">
+                                posté {{ $comment->created_at->diffForHumans() }}
+                                @if ($comment->created_at != $comment->updated_at)
+                                    <div class="row">modifié {{ $comment->updated_at->diffForHumans() }}</div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <p>{{ $comment->content }}</p>
+                            <img class="photo_user" src="images/{{ $comment->image }} " alt="image du post">
+                        </div>
+
+
+
+
+                        <!-- *************************************** Bouton modifier => mène à la page de modification du message ***********************************************-->
+                        <div class="row">
+                            <div class="col-6">
+                                {{-- @can('update', $post) --}}
+                                <a href="{{ route('comment.edit', $comment) }}">
+                                    <button class="btn btn-info">Modifier</button>
+                                </a>
+                            </div>
+
+                            {{-- @endcan --}}
+
+                            <!-- ********************************************************* Bouton supprimer **************************************************-->
+                            <div class="col-6">
+                                {{-- @can('delete', $post) --}}
+                                <div class="container text-center">
+                                    <form action="{{ route('comment.destroy', $comment) }}" method="POST">
+                                        @csrf
+                                        @method ('DELETE')
+                                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {{-- @endcan --}}
+                @endforeach
             @endforeach
+
+
+
 
 
 

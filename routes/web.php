@@ -35,3 +35,7 @@ Route::resource('/users', App\Http\Controllers\UserController::class)->except('i
 
 //******************************* route resource POSTS *************************************** */
 Route::resource('/post', App\Http\Controllers\PostController::class)->except('index', 'create', 'show');
+
+
+//******************************* route resource COMMENTS *************************************** */
+Route::resource('/comment', App\Http\Controllers\CommentController::class)->except('index', 'create', 'show');

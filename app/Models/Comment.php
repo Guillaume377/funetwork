@@ -9,6 +9,16 @@ class Comment extends Model
 {
     use HasFactory;
 
+     // je charge automatiquement l'utilisateur à chaque fois que je récupère un commentaire
+     protected $with = ['user'];
+
+     protected $fillable = [
+         'content',
+         'tags',
+         'image',
+         'post_id',
+         'user_id',
+     ];
     // nom de la fonction au singulier car 1 seule message en relation
     // cardinalité 1,1
     public function post()

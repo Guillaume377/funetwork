@@ -13,20 +13,22 @@
     width:60%;
 }
 
-.valider {
-    border-radius: 50%;
-}
 .card-header{
-    background-color: darkorange;
+    background-color:deepskyblue;
 }
 
 .photo_user{
-    width:10%;
+    width:15%;
     border-radius: 50%;
 }
 
+.commentaire {
+    background-color: darkorange;
+    border-radius: 15px;
+}
 
-/******** EDIT.BLADE.PHP/post *******/
+
+/******** EDIT.BLADE.PHP/post et comment*******/
 
 .modifpost {
     background-color: darkorange;
