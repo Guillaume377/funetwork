@@ -52,7 +52,7 @@
                     </div>
                 </div>
 
-                <!-- ******************************************** input image **********************************************-->
+                <!-- ******************************************** input image post **********************************************-->
 
                 <div class="row mb-3">
                     <label for="image" class="col-md-4 col-form-label text-md-end">{{ _('image') }}</label>
@@ -108,7 +108,7 @@
 
                     <div class="card-body">
                         <p>{{ $post->content }}</p>
-                        <img class="photo_user" src="images/{{ $post->image }} " alt="image du post">
+                        <img class="photo_message" src="images/{{ $post->image }} " alt="image du post">
                     </div>
 
                 </div>
@@ -133,7 +133,7 @@
                 </div>
                 {{-- @endcan --}}
 
-                <!-- ********************************************************* Bouton supprimer **************************************************-->
+                <!-- ********************************************************* Bouton supprimer le post **************************************************-->
                 <div class="row col-4">
                     {{-- @can('delete', $post) --}}
                     <div class="container text-center">
@@ -149,7 +149,7 @@
                 <!--********************************************** formulaire ajout commentaire *************************************-->
 
 
-                <div style="display:none" class="col p-3 mb-2" id="formulairecommentaire{{ $post->id }}">
+                <div style="display:none" class="p-3 mb-2" id="formulairecommentaire{{ $post->id }}">
                     <form action="{{ route('comment.store') }}" method="POST" class="commentaire w-50 mx-auto">
                         @csrf
                         <input type="hidden" name="post_id" value="{{ $post->id }}">
@@ -216,13 +216,13 @@
                 </form>
 
 
-                <!-- ******************************************** affichage commentaire**********************************************-->
+                <!-- ******************************************** boucle qui affiche les commentaires**********************************************-->
 
                 @foreach ($post->comments as $comment)
-                    <div class="card w-50 bg-warning mb-3">
+                    <div class="card w-75 bg-warning mb-3">
                         <div class="card-header row">
                             <div class="d-flex flex-column align-items-center col-4">
-                                <img class="photo_user" src="{{ asset('images/' . $comment->image) }} " alt="imagePost">
+                                <img class="photo_user" src="images/{{ $comment->user->image }} " alt="imagePost">
                                 posté par {{ $comment->user->pseudo }}
                             </div>
 
@@ -233,20 +233,21 @@
                             <div class="col-md-4 d-flex justify-content-around">
                                 posté {{ $comment->created_at->diffForHumans() }}
                                 @if ($comment->created_at != $comment->updated_at)
-                                    <div class="row">modifié {{ $comment->updated_at->diffForHumans() }}</div>
+                                    <div>modifié {{ $comment->updated_at->diffForHumans() }}</div>
                                 @endif
                             </div>
                         </div>
 
                         <div class="card-body">
                             <p>{{ $comment->content }}</p>
-                            <img class="photo_user" src="images/{{ $comment->image }} " alt="image du post">
+                            <img class="photo_commentaire" src="images/{{ $comment->image }} "
+                                alt="image du commentaire">
                         </div>
 
 
 
 
-                        <!-- *************************************** Bouton modifier => mène à la page de modification du message ***********************************************-->
+                        <!-- *************************************** Bouton modifier => mène à la page de modification du commentaire ***********************************************-->
                         <div class="row">
                             <div class="col-6">
                                 {{-- @can('update', $post) --}}
@@ -257,7 +258,7 @@
 
                             {{-- @endcan --}}
 
-                            <!-- ********************************************************* Bouton supprimer **************************************************-->
+                            <!-- ********************************************************* Bouton supprimer le commentaire **************************************************-->
                             <div class="col-6">
                                 {{-- @can('delete', $post) --}}
                                 <div class="container text-center">

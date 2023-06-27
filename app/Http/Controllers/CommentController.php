@@ -41,7 +41,7 @@ class CommentController extends Controller
 
 
     //on redirige sur la page précédente
-    return back()->with('commentaire', 'Le commentaire a bien été envoyé !');
+    return redirect()->route('home')->with('commentaire', 'Le commentaire a bien été envoyé !');
 }
 
 

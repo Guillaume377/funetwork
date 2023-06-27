@@ -22,9 +22,17 @@
     border-radius: 50%;
 }
 
+.photo_message{
+    width:30%;
+}
+
 .commentaire {
     background-color: darkorange;
     border-radius: 15px;
+}
+
+.photo_commentaire{
+    width:30%;
 }
 
 

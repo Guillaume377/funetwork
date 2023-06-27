@@ -92,5 +92,15 @@ class HomeController extends Controller
         //return view ('home', compact('posts'));
 
 
+
+
+
+        
+        // mettre en premier le commentaire le plus récent
+        // $comments = Comment::with ('comments.user', 'user')->latest();
+
+        // return view ('home', ['comments' =>$comments]);
+
+
     }
 }
