@@ -8,9 +8,9 @@
         <div class="row justify-content-center text-center">
 
             @if (Route::currentRouteName() == 'search')
-                <h1 class="m-5">Résultats de la recherche</h1>
+                <h1>Résultats de la recherche</h1>
             @else
-                <h1 class="m-5">Accueil / liste de messages</h1>
+                <h1>Accueil / liste de messages</h1>
 
                 <h2 class="m-5">Poster un message</h2>
 
@@ -81,6 +81,7 @@
 
             @if (count($posts) == 0)
                 <p>Aucun résultat pour votre recherche</p>
+                <img class="sorry w-50" src="images/sorry2.jpg" alt="image aucun résultat">
             @else
                 <!-- s'il y a des résultats => foreach classique -->
 

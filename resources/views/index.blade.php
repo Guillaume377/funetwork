@@ -4,7 +4,8 @@
     <div class=container m-5 p-5 mx-auto>
 
         <div class ="text-center">
-            <h1>Bienvenue sur le réseau social Laravel !</h1>
+            <h1>DIscutez, partager de bons moments sur le réseau social Funetwork !</h1>
+            <h2>Les collègues, ce n'est pas qu'au boulot!</h2>
         </div>
 
         <div class="row mt-5 w-50 mx-auto">

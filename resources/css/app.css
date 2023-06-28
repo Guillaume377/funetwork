@@ -1,9 +1,14 @@
 
+nav {
+    background-color: darkorange;
+}
 
 
-h1{
+
+h1, h2 {
     padding-top: 10%;
-    font-family: 'Sedgwick Ave Display', cursive;   
+    font-family: 'Sedgwick Ave Display', cursive;
+    color:blue;
 }
 
 /******** APP.BLADE.PHP/resources *******/

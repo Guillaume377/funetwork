@@ -23,7 +23,7 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img class=w-75 src="images/logo_funetwork.jpg">
@@ -100,13 +100,13 @@
 
         <main class="py-4">
 
-            <div class="container-fluid text-center pt-5 mt-5">
+            <div class="container-fluid text-center">
                 @if (session()->has('message'))
                     <p class="alert alert-success">{{ session()->get('message') }}</p>
                 @endif
 
                 @if ($errors->any())
-                    <div class="alert alert-danger pt-5 mt-5">
+                    <div class="alert alert-danger">
                         <ul class="list-unstyled">
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
