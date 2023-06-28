@@ -41,7 +41,7 @@ class CommentController extends Controller
 
 
     //on redirige sur la page précédente
-    return redirect()->route('home')->with('commentaire', 'Le commentaire a bien été envoyé !');
+    return back()->with('commentaire', 'Le commentaire a bien été envoyé !');
 }
 
 
@@ -73,7 +73,7 @@ class CommentController extends Controller
          $comment->save();
  
          //on redirige sur la page précédente
-         return redirect()->route('home')-> with('commentaire', 'Le commentaire a bien été modifié');
+         return redirect()->route('home')-> with('message', 'Le commentaire a bien été modifié');
     }
     /**
      * Remove the specified resource from storage.
@@ -82,11 +82,9 @@ class CommentController extends Controller
     {
         //on vérifie que c'est bien l'utilisateur connecté qui fait la demande de suppression
         // ()les id doivent être identique)
-        if (Auth::user()->id == $comment->user_id) {
+        
             $comment->delete();
-            return redirect()->route('home')->with('commentaire', 'Le commentaire a bien été supprimé');
-        }else{
-            return redirect()->back()->withErrors(['erreur' => 'suppression du commentaire impossible']);
+            return redirect()->route('home')->with('message', 'Le commentaire a bien été supprimé');
         }
-    }
+    
 }

@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
         //création de l'administrateur
         User::create([
             'pseudo' => 'administrateur',
+            'image' => 'user1.jpg',
             'password' => Hash::make('Admin99@'),
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
@@ -28,6 +29,7 @@ class UserSeeder extends Seeder
         // création d'un utilisateur de test
         User::create([
             'pseudo' => 'utilisateur',
+            'image' => 'user1.jpg',
             'password' => Hash::make('Utili99@'),
             'email' => 'utili@gmail.com',
             'email_verified_at' => now(),

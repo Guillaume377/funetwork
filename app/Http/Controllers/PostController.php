@@ -16,8 +16,10 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+
+
     public function store(Request $request) // $request = les données qui viennent du formulaire
-                                            // $request['content'] = "salut les gars"
+    // $request['content'] = "salut les gars"
     {
         // 1) VALIDATION DES DONNEES : on valide les champs en précisant les critères attendus
         $request->validate([
@@ -26,13 +28,11 @@ class PostController extends Controller
             'image' => 'nullable|string',
             'tags' => 'required|min:3|max:50',
             // autre syntaxe possible : 'content' => ['required', 'min:25', 'max:1000']
-        ]);
+        ]);;
 
-       ;
-
-       // 2) sauvegarde du message => va lancer un insert into en SQL
+        // 2) sauvegarde du message => va lancer un insert into en SQL
         Post::create([
-                                            // 3 syntaxes possibles pour accèder au contenu de $request
+            // 3 syntaxes possibles pour accèder au contenu de $request
             'content' => $request->content, // syntaxe objet
             'tags' => $request['tags'],     // syntaxe tableau associatif
             'image' => $request->input('image'),   // autre syntaxe
@@ -45,7 +45,6 @@ class PostController extends Controller
     }
 
 
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -54,6 +53,8 @@ class PostController extends Controller
         return view('post/edit', ['post' => $post]);
     }
 
+
+    // ************************************************** Fonction modification Post *********************************** //
     /**
      * Update the specified resource in storage.
      */
@@ -74,9 +75,10 @@ class PostController extends Controller
         $post->save();
 
         //on redirige sur la page précédente
-        return redirect()->route('home')-> with('message', 'Le message a bien été modifié');
+        return redirect()->route('home')->with('message', 'Le message a bien été modifié');
     }
 
+    // ************************************************** Fonction suppression Post *********************************** //
     /**
      * Remove the specified resource from storage.
      */
@@ -87,8 +89,29 @@ class PostController extends Controller
         if (Auth::user()->id == $post->user_id) {
             $post->delete();
             return redirect()->route('home')->with('post', 'Le post a bien été supprimé');
-        }else{
+        } else {
             return redirect()->back()->withErrors(['erreur' => 'suppression du post impossible']);
         }
+    }
+    // ************************************************** Fonction recherche (formulaire dans la Navbar) *********************************** //
+
+    public function search(Request $request)
+    {
+        //je valide la saisie aves des critères
+        $request->validate([
+            //name de 'input' =>[critères]
+            'search' => 'required|min:3|max:20|string'
+        ]);
+
+        // je récupère le mot clé et j'enlève les espaces autour pour la comparaison
+        $keyword = trim($request->input('search')); // trim : enlever les espaces
+
+
+        //je récupère les posts en fonction du mot clé dans la recherche
+        $posts = Post::where('tags', 'like', "%{$keyword}%") //"%    %"= prendre en compte les caractères entourant le mot recherché
+            ->orWhere('content', 'like', "%{$keyword}%")         // exemple : mot recherché "test" -> "%test%" = test, tester, détester,...
+            ->paginate(10);                                             // 'like' = 'comme ce qui est recherché'
+
+        return view('home', ['posts' => $posts]);
     }
 }
