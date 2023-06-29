@@ -16,7 +16,7 @@
 
                 <!--********************************************** formulaire ajout message *************************************-->
 
-                <form action="{{ route('post.store') }}" method="post" class="message w-75 mx-auto">
+                <form action="{{ route('post.store') }}" enctype="multipart/form-data" {{--enctype = pour UPLOAD--}} method="post" class="message w-75 mx-auto">
                     @csrf
 
                     <!-- ******************************************* input content **********************************************-->
@@ -54,7 +54,7 @@
 
                     <!-- ******************************************** input image post **********************************************-->
 
-                    <div class="row mb-3">
+                    {{-- <div class="row mb-3">
                         <label for="image" class="col-md-4 col-form-label text-md-end">{{ _('image') }}</label>
 
                         <div class="col-md-6">
@@ -67,11 +67,22 @@
                                 </span>
                             @enderror
                         </div>
-                    </div>
+                    </div> --}}
 
+                     <!-- ***************UPLOAD IMAGE*********** -->
+                     <div class="form-group row">
+
+                        <label for="image"
+                        class="col-md-4 col-form-label text-md-right">{{ __('image (facultative)') }}</label>
+
+                        <div class="col-md-6">
+                            <input type="file" name="image" class="form-control">
+                        </div>
+                     </div>
+                 
                     <!-- ******************************************** bouton Valider **********************************************-->
 
-                    <button type="submit" class=" valider btn btn-primary"></i>Valider</button>
+                    <button type="submit" class=" valider btn btn-primary m-2"></i>Valider</button>
 
                 </form>
             @endif
@@ -95,7 +106,9 @@
                                 @if ($post->user->image)
                                     <img class="photo_user" src="images/{{ $post->user->image }} " alt="image profil">
                                 @endif
-                                posté par {{ $post->user->pseudo }}
+                                <!------- lien vers le profil public ------->
+                                <a href="{{ route('users.show', $post->user)}}">
+                                <strong>{{ $post->user->pseudo }}</strong>
                             </div>
 
                             <div class="col-4">
@@ -158,7 +171,7 @@
 
 
                     <div style="display:none" class="p-3 mb-2" id="formulairecommentaire{{ $post->id }}">
-                        <form action="{{ route('comment.store') }}" method="POST" class="commentaire w-50 mx-auto">
+                        <form action="{{ route('comment.store') }}"enctype="multipart/form-data" {{--enctype = pour UPLOAD--}} method="POST" class="commentaire w-50 mx-auto">
                             @csrf
                             <input type="hidden" name="post_id" value="{{ $post->id }}">
 
@@ -198,7 +211,7 @@
 
                             <!-- ******************************************** input image commentaire**********************************************-->
 
-                            <div class="row mb-3">
+                            {{-- <div class="row mb-3">
                                 <label for="image"
                                     class="col-md-4 col-form-label text-md-end">{{ _('image') }}</label>
 
@@ -213,8 +226,21 @@
                                         </span>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
 
+
+                             <!-- ***************UPLOAD IMAGE*********** -->
+                     <div class="form-group row">
+
+                        <label for="image"
+                        class="col-md-4 col-form-label text-md-right">{{ __('image (facultative)') }}</label>
+
+                        <div class="col-md-6">
+                            <input type="file" name="image" class="form-control">
+                        </div>
+                     </div>
+
+                      <!-- ***************Bouton annuler et valider*********** -->
                             <button class="btn btn-danger"
                                 onclick="document.getElementById('formulairecommentaire{{ $post->id }}').style.display = 'none'">
                                 Annuler

@@ -25,7 +25,7 @@ class PostController extends Controller
         $request->validate([
             //'name de l'input' => ['critères]
             'content' => 'required|min:25|max:1000',
-            'image' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif;svg|max:2048',
             'tags' => 'required|min:3|max:50',
             // autre syntaxe possible : 'content' => ['required', 'min:25', 'max:1000']
         ]);;
@@ -35,7 +35,7 @@ class PostController extends Controller
             // 3 syntaxes possibles pour accèder au contenu de $request
             'content' => $request->content, // syntaxe objet
             'tags' => $request['tags'],     // syntaxe tableau associatif
-            'image' => $request->input('image'),   // autre syntaxe
+            'image' => isset($request['image']) ? uploadImage($request['image']) : "null",   // autre syntaxe
             'user_id' => Auth::user()->id // j'accède à l'id du user connecté
         ]);
 

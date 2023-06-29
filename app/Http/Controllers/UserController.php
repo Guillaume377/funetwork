@@ -35,9 +35,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
-        //
+       $user->load('posts'); // je charge les posts du user
+       return view('user.profil', compact('user')); // je renvoie la vue du user
     }
 
     /**

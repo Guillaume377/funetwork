@@ -5,8 +5,10 @@
 
 body{
     background-color:lightyellow;
+    /*background-image: url(../views/images/logo_funetwork.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;*/
 }
-
 
 h1, h2 {
     padding-top: 5%;
