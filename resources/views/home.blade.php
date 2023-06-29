@@ -82,7 +82,7 @@
                  
                     <!-- ******************************************** bouton Valider **********************************************-->
 
-                    <button type="submit" class=" valider btn btn-primary m-2"></i>Valider</button>
+                    <button type="submit" class="Modif-Valid btn m-2"></i>Valider</button>
 
                 </form>
             @endif
@@ -135,7 +135,7 @@
                         {{-- @can('fonction de PostPolicy.php, class Post de AuthServiceProvider.php') --}}
                         @can('update', $post)
                             <a href="{{ route('post.edit', $post) }}">
-                                <button class="btn btn-info">Modifier</button>
+                                <button class="Modif-Valid btn mb-3">Modifier</button>
                             </a>
                         @endcan
                     </div>
@@ -144,7 +144,7 @@
                     <!-- *************************************** Bouton commenter => mène à la page commentaire ***********************************************-->
                     <div class="row col-4">
                         <div class="container">
-                            <button class=" commenter btn btn-warning mb-3"
+                            <button class=" Commenter btn mb-3"
                                 onclick="document.getElementById('formulairecommentaire{{ $post->id }}').style.display = 'block'">
                                 Commenter
                             </button>
@@ -160,7 +160,7 @@
                                 <form action="{{ route('post.destroy', $post) }}" method="POST">
                                     @csrf
                                     @method ('DELETE')
-                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                    <button type="submit" class="Supprimer btn">Supprimer</button>
                                 </form>
                             </div>
                         @endcan
@@ -290,7 +290,7 @@
                                     {{-- @can('fonction de CommentPolicy.php, class Post de AuthServiceProvider.php') --}}
                                     @can('update', $comment)
                                         <a href="{{ route('comment.edit', $comment) }}">
-                                            <button class="btn btn-info">Modifier</button>
+                                            <button class="Modif-Valid btn">Modifier</button>
                                         </a>
                                     @endcan
                                 </div>
@@ -305,7 +305,7 @@
                                             <form action="{{ route('comment.destroy', $comment) }}" method="POST">
                                                 @csrf
                                                 @method ('DELETE')
-                                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                                                <button type="submit" class="Supprimer btn">Supprimer</button>
                                             </form>
                                         </div>
                                     @endcan

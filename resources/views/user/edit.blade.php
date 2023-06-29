@@ -18,21 +18,21 @@
                 @method('PUT')
 
                 <div class="form-group">
-                    <label for="pseudo">Nouveau pseudo</label>
+                    <label for="pseudo"><p>Nouveau pseudo<p></label>
                     <input required type="text" class="form-control" placeholder="modifier" name="pseudo"
                         value="{{ $user->pseudo }}" id="pseudo">
 
                 </div>
 
                 <div class="form-group">
-                    <label for="image">Nouvelle image</label>
+                    <label for="image"><p>Nouvelle image<p></label>
                     <input required type="text" class="form-control" placeholder="modifier" name="image"
                         value="{{ $user->image }}" id="image">
                 </div>
 
                 
                 <!-- ********************** bouton valider ********************* -->
-                <button type="submit" class="btn btn-primary">Valider</button>
+                <button type="submit" class="Modif-Valid btn mt-2">Valider</button>
             </form>
 
 
@@ -40,7 +40,7 @@
             <form class= "d-flex justify-content-center ms-4" action="{{route('users.destroy', $user)}}" method="post">
                 @csrf
                 @method("delete")
-                <button type="submit" class="ms-3 btn btn-danger">supprimer le compte</button>
+                <button type="submit" class="Supprimer mt-2 ms-3 btn">supprimer le compte</button>
             </form>
         </div>
     </main>

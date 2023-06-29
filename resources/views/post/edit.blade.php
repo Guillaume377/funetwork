@@ -38,7 +38,7 @@
 
 
                     <!-- ********************** bouton valider ********************* -->
-                    <button type="submit" class="validermodif btn btn-primary">Valider</button>
+                    <button type="submit" class="Modif-Valid btn">Valider</button>
                 </form>
 
             </div>
