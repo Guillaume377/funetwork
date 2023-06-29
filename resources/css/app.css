@@ -1,17 +1,29 @@
 
-nav {
-    background-color: darkorange;
+.navbar {
+    background-color: blue !important;
 }
 
+body{
+    background-color:lightyellow;
+}
 
 
 h1, h2 {
-    padding-top: 10%;
+    padding-top: 5%;
     font-family: 'Sedgwick Ave Display', cursive;
-    color:blue;
+    color:darkorange;
+}
+
+.btn {
+    font-family: 'Sedgwick Ave Display', cursive;
+    color:white;
+    
 }
 
 /******** APP.BLADE.PHP/resources *******/
+.logo {
+    border-radius:20px;
+}
 
 .search {
     border-radius: 10px;
@@ -21,6 +33,7 @@ h1, h2 {
     border-radius: 10px;
     background-color: darkorange;
     color: white;
+    font-family: 'Sedgwick Ave Display', cursive;
 }
 
 .btn-search:hover {

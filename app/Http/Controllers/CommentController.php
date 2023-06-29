@@ -50,6 +50,7 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
+        $this->authorize('update', $comment);
         return view('comment/edit', ['comment' => $comment]);
     }
 
@@ -58,6 +59,8 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
+        $this->authorize('update', $comment);
+
         $request->validate([
             'content' => 'required|max:1000',
             'tags' => 'required|max:50',
@@ -79,7 +82,9 @@ class CommentController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Comment $comment)
-    {
+        {
+        $this->authorize('delete', $comment);
+
         //on vérifie que c'est bien l'utilisateur connecté qui fait la demande de suppression
         // ()les id doivent être identique)
         

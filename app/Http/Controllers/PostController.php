@@ -50,6 +50,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $this->authorize('update', $post);
         return view('post/edit', ['post' => $post]);
     }
 
@@ -60,6 +61,8 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $this->authorize('update', $post);
+
         $request->validate([
             'content' => 'required|max:1000',
             'tags' => 'required|max:50',
@@ -84,6 +87,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $this->authorize('delete', $post);
+ 
         //on vérifie que c'est bien l'utilisateur connecté qui fait la demande de suppression
         // ()les id doivent être identique)
         if (Auth::user()->id == $post->user_id) {

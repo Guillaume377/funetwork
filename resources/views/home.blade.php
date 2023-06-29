@@ -117,39 +117,44 @@
                     </div>
 
 
+                    <!-- *************************************** Bouton modifier => mène à la page de modification du message ***********************************************-->
+                    <div class="row col-4">
+                        {{-- @can('fonction de PostPolicy.php, class Post de AuthServiceProvider.php') --}}
+                        @can('update', $post)
+                            <a href="{{ route('post.edit', $post) }}">
+                                <button class="btn btn-info">Modifier</button>
+                            </a>
+                        @endcan
+                    </div>
+
+
                     <!-- *************************************** Bouton commenter => mène à la page commentaire ***********************************************-->
                     <div class="row col-4">
                         <div class="container">
-                            <button class=" commenter btn btn-warning"
+                            <button class=" commenter btn btn-warning mb-3"
                                 onclick="document.getElementById('formulairecommentaire{{ $post->id }}').style.display = 'block'">
                                 Commenter
                             </button>
                         </div>
                     </div>
 
-                    <!-- *************************************** Bouton modifier => mène à la page de modification du message ***********************************************-->
-                    <div class="row col-4">
-                        {{-- @can('update', $post) --}}
-                        <a href="{{ route('post.edit', $post) }}">
-                            <button class="btn btn-info">Modifier</button>
-                        </a>
-                    </div>
-                    {{-- @endcan --}}
 
                     <!-- ********************************************************* Bouton supprimer le post **************************************************-->
                     <div class="row col-4">
-                        {{-- @can('delete', $post) --}}
-                        <div class="container text-center">
-                            <form action="{{ route('post.destroy', $post) }}" method="POST">
-                                @csrf
-                                @method ('DELETE')
-                                <button type="submit" class="btn btn-danger">Supprimer</button>
-                            </form>
-                        </div>
+                        {{-- @can('fonction de PostPolicy.php, class Post de AuthServiceProvider.php') --}}
+                        @can('delete', $post)
+                            <div class="container text-center">
+                                <form action="{{ route('post.destroy', $post) }}" method="POST">
+                                    @csrf
+                                    @method ('DELETE')
+                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                </form>
+                            </div>
+                        @endcan
                     </div>
-                    {{-- @endcan --}}
 
-                    <!--********************************************** formulaire ajout commentaire *************************************-->
+
+                    <!--******************************************************* formulaire ajout commentaire *************************************-->
 
 
                     <div style="display:none" class="p-3 mb-2" id="formulairecommentaire{{ $post->id }}">
@@ -253,34 +258,34 @@
 
 
 
-
                             <!-- *************************************** Bouton modifier => mène à la page de modification du commentaire ***********************************************-->
                             <div class="row">
                                 <div class="col-6">
-                                    {{-- @can('update', $post) --}}
-                                    <a href="{{ route('comment.edit', $comment) }}">
-                                        <button class="btn btn-info">Modifier</button>
-                                    </a>
+                                    {{-- @can('fonction de CommentPolicy.php, class Post de AuthServiceProvider.php') --}}
+                                    @can('update', $comment)
+                                        <a href="{{ route('comment.edit', $comment) }}">
+                                            <button class="btn btn-info">Modifier</button>
+                                        </a>
+                                    @endcan
                                 </div>
 
-                                {{-- @endcan --}}
+
 
                                 <!-- ********************************************************* Bouton supprimer le commentaire **************************************************-->
                                 <div class="col-6">
-                                    {{-- @can('delete', $post) --}}
-                                    <div class="container text-center">
-                                        <form action="{{ route('comment.destroy', $comment) }}" method="POST">
-                                            @csrf
-                                            @method ('DELETE')
-                                            <button type="submit" class="btn btn-danger">Supprimer</button>
-                                        </form>
-                                    </div>
+                                    {{-- @can('fonction de CommentPolicy.php, class Post de AuthServiceProvider.php') --}}
+                                    @can('delete', $comment)
+                                        <div class="container text-center">
+                                            <form action="{{ route('comment.destroy', $comment) }}" method="POST">
+                                                @csrf
+                                                @method ('DELETE')
+                                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                                            </form>
+                                        </div>
+                                    @endcan
                                 </div>
                             </div>
                         </div>
-
-
-                        {{-- @endcan --}}
                     @endforeach
                 @endforeach
             @endif
