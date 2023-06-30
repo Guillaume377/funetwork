@@ -45,6 +45,14 @@ span {
     color: deepskyblue;
 }
 
+.card {
+    margin-bottom: 40%;
+}
+
+footer {
+    background-color: darkorange;
+}
+
 /******** APP.BLADE.PHP/resources *******/
 .logo {
     border-radius: 20px;
@@ -65,6 +73,11 @@ span {
     background-color: white;
     color: blue;
     box-shadow: 7px 5px 5px blue;
+}
+
+.Ins-con {
+    margin-top: 50%;
+    margin-bottom: 50%;
 }
 
 
@@ -133,6 +146,12 @@ span {
     box-shadow: red;
 }
 
+/******** PROFIL.BLADE.PHP*******/
+.bienvenue {
+    font-family: 'Sedgwick Ave Display', cursive;
+    font-size: x-large;
+   
+}
 
 /******** EDIT.BLADE.PHP/post et comment*******/
 

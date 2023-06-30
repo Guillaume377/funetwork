@@ -26,7 +26,8 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{asset('images\logo_funetwork.jpg')}}" class = logo alt="logo_funetwork" style="height:80px">
+                    <img src="{{ asset('images\logo_funetwork.jpg') }}" class=logo alt="logo_funetwork"
+                        style="height:80px">
                     {{-- <img class="w-75 logo" src="images/logo_funetwork.jpg"> --}}
                     {{-- {{ config('app.name', 'Laravel') }} --}}
                 </a>
@@ -62,13 +63,13 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Connexion') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Inscription') }}</a>
                                 </li>
                             @endif
                         @else
@@ -85,7 +86,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Déconnexion') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -121,6 +122,14 @@
 
         </main>
     </div>
+
+
+    <footer>
+        <div class="container mt-5 text-center">
+            <p>Copyright 2023 Funetwork</p>
+        </div>
+    </footer>
+
 </body>
 
 </html>

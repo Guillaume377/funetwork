@@ -10,10 +10,10 @@
 
         <div class=" inscription-connexion row mt-5 w-50 mx-auto">
             <div class="col-6">
-                <a href="register"><button class="Modif-Valid Inscription btn btn-lg px-5">Inscription</button></a>
+                <a href="register"><button class="Modif-Valid Ins-con btn btn-lg px-5">Inscription</button></a>
             </div>
             <div class="col-6">
-                <a href="login"><button class="Modif-Valid Connexion btn btn-lg px-5">Connexion</button></a>
+                <a href="login"><button class="Modif-Valid Ins-con btn btn-lg px-5">Connexion</button></a>
             </div>
         </div>
         
