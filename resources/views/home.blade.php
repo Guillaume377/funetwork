@@ -53,22 +53,7 @@
                         </div>
                     </div>
 
-                    <!-- ******************************************** input image post **********************************************-->
-
-                    {{-- <div class="row mb-3">
-                        <label for="image" class="col-md-4 col-form-label text-md-end">{{ _('image') }}</label>
-
-                        <div class="col-md-6">
-                            <input id="image" type="text" class="form-control @error('image') is-invalid @enderror"
-                                name="image" placeholder="image.jpg" autocomplete="image" autofocus>
-
-                            @error('image')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div> --}}
+                    <!-- ******************************************** input image post **********************************************--> --}}
 
                     <!-- ***************UPLOAD IMAGE*********** -->
                     <div class="form-group row">
@@ -213,23 +198,6 @@
 
                             <!-- ******************************************** input image commentaire**********************************************-->
 
-                            {{-- <div class="row mb-3">
-                                <label for="image"
-                                    class="col-md-4 col-form-label text-md-end">{{ _('image') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="image" type="text"
-                                        class="form-control @error('image') is-invalid @enderror" name="image"
-                                        placeholder="image.jpg" autocomplete="image" autofocus>
-
-                                    @error('image')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div> --}}
-
 
                             <!-- ***************UPLOAD IMAGE*********** -->
                             <div class="form-group row">
@@ -319,9 +287,6 @@
                     @endforeach
                 @endforeach
             @endif
-
-
-
 
 
 
