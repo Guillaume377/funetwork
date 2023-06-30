@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -56,7 +56,7 @@ class UserController extends Controller
     {
         $request->validate([
             'pseudo' => 'required|max:40',
-            'image' => 'nullable|string'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         //on modifie les infos de l'utilisateur

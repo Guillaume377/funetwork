@@ -1,3 +1,6 @@
+
+/************* GENERAL****************/
+
 .navbar {
     background-color: darkorange !important;
 }
@@ -20,7 +23,7 @@ h2 {
 }
 
 h3 {
-    color:white;
+    color: white;
 }
 
 p {
@@ -39,12 +42,12 @@ p {
 
 
 span {
-    color:deepskyblue;
+    color: deepskyblue;
 }
+
 /******** APP.BLADE.PHP/resources *******/
 .logo {
     border-radius: 20px;
-    border-color: blue;
 }
 
 .search {
@@ -53,14 +56,14 @@ span {
 
 .btn-search {
     border-radius: 10px;
-    background-color:blue;
+    background-color: blue;
     color: white;
     font-family: 'Sedgwick Ave Display', cursive;
 }
 
 .btn-search:hover {
     background-color: white;
-    color : blue;
+    color: blue;
     box-shadow: 7px 5px 5px blue;
 }
 
@@ -92,6 +95,11 @@ span {
 .commentaire {
     background-color: darkorange;
     border-radius: 15px;
+}
+
+.card-commentaire {
+    background-color: darkorange;
+    border-radius: 20px;
 }
 
 .photo_commentaire {
@@ -133,6 +141,98 @@ span {
     border-radius: 50%;
 }
 
-.validermodif {
-    width: 20%;
+
+/******** EDIT.BLADE.PHP/user*******/
+
+.upload {
+    width:200%;
+}
+
+
+
+
+
+/*==============MEDIA QUERIES 991px=============*/
+
+
+@media screen and (max-width: 991px) {
+
+/* EDIT.BLADE.PHP/user */
+
+.mesinfos {
+    display:flex;
+    flex-direction: column;
+}
+
+.photo_profil {
+    margin:auto;
+    margin-bottom: 5%;
+}
+
+.Supprimer {
+    margin-right:13.5%;
+}
+
+}
+/*==============MEDIA QUERIES 767px=============*/
+
+
+@media screen and (max-width: 767px) {
+
+
+   /* INDEX.BLADE.PHP */ 
+
+.inscription-connexion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.Inscription {
+    margin-bottom:5%;
+}
+
+
+/* REGISTER.BLADE.PHP */
+
+.facultative {
+    display:flex;
+    justify-content:start !important;
+}
+
+
+/* HOME.BLADE.PHP */
+
+.message {
+    border-radius: 20px;
+}
+
+#tagspost {
+    width:100%
+}
+
+
+
+/* EDIT.BLADE.PHP/post et comment */
+
+.modifpost {
+    border-radius : 20px;
+}
+
+#message {
+    width :200%;
+}
+
+#tags {
+    width:100%;
+}
+
+/* EDIT.BLADE.PHP/user */
+
+.Supprimer {
+    margin-right:6%;
+}
+
+
+
 }

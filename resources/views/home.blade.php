@@ -10,19 +10,20 @@
             @if (Route::currentRouteName() == 'search')
                 <h1>Résultats de la recherche</h1>
             @else
-                <h1>Accueil / liste de messages</h1>
+                <h1>Bienvenue sur votre réseau social <span>Funetwork!</h1>
 
                 <h2 class="m-5">Poster un message</h2>
 
                 <!--********************************************** formulaire ajout message *************************************-->
 
-                <form action="{{ route('post.store') }}" enctype="multipart/form-data" {{--enctype = pour UPLOAD--}} method="post" class="message w-75 mx-auto">
+                <form action="{{ route('post.store') }}" enctype="multipart/form-data" {{-- enctype = pour UPLOAD --}} method="post"
+                    class="message w-75 mx-auto">
                     @csrf
 
                     <!-- ******************************************* input content **********************************************-->
 
                     <div class="row mb-3">
-                        <i class="fas fa-pen-fancy text-primary fa-2x me-2"></i>
+                        <i class="fas fa-pen-fancy text-primary fa-2x m-2"></i>
                         <label for="content">Ecris ton message</label>
                         <textarea required class="container-fluid mt-2" type="text" name="content" id="content" placeholder="Salut !"></textarea>
 
@@ -41,7 +42,7 @@
                                 class="fa-solid fa-hashtag text-primary fa-2x me-2"></i></label>
 
                         <div class="col-md-6">
-                            <input id="tags" type="text" class="form-control @error('tags') is-invalid @enderror"
+                            <input id="tags tagspost" type="text" class="form-control @error('tags') is-invalid @enderror"
                                 name="tags" placeholder="bonjour hello" required autofocus>
 
                             @error('tags')
@@ -69,17 +70,17 @@
                         </div>
                     </div> --}}
 
-                     <!-- ***************UPLOAD IMAGE*********** -->
-                     <div class="form-group row">
+                    <!-- ***************UPLOAD IMAGE*********** -->
+                    <div class="form-group row">
 
                         <label for="image"
-                        class="col-md-4 col-form-label text-md-right">{{ __('image (facultative)') }}</label>
+                            class="col-md-4 col-form-label text-md-right d-flex justify-content-end">{{ __('image (facultative)') }}</label>
 
                         <div class="col-md-6">
                             <input type="file" name="image" class="form-control">
                         </div>
-                     </div>
-                 
+                    </div>
+
                     <!-- ******************************************** bouton Valider **********************************************-->
 
                     <button type="submit" class="Modif-Valid btn m-2"></i>Valider</button>
@@ -107,8 +108,8 @@
                                     <img class="photo_user" src="images/{{ $post->user->image }} " alt="image profil">
                                 @endif
                                 <!------- lien vers le profil public ------->
-                                <a href="{{ route('users.show', $post->user)}}">
-                                <strong>{{ $post->user->pseudo }}</strong>
+                                <a href="{{ route('users.show', $post->user) }}">
+                                    <strong>{{ $post->user->pseudo }}</strong></a>
                             </div>
 
                             <div class="col-4">
@@ -171,14 +172,15 @@
 
 
                     <div style="display:none" class="p-3 mb-2" id="formulairecommentaire{{ $post->id }}">
-                        <form action="{{ route('comment.store') }}"enctype="multipart/form-data" {{--enctype = pour UPLOAD--}} method="POST" class="commentaire w-50 mx-auto">
+                        <form action="{{ route('comment.store') }}"enctype="multipart/form-data" {{-- enctype = pour UPLOAD --}}
+                            method="POST" class="commentaire w-50 mx-auto">
                             @csrf
                             <input type="hidden" name="post_id" value="{{ $post->id }}">
 
                             <!-- ******************************************* input content commentaire **********************************************-->
 
                             <div class="row mb-3">
-                                <i class="fas fa-pen-fancy text-primary fa-2x me-2"></i>
+                                <i class="fas fa-pen-fancy text-primary fa-2x m-2"></i>
                                 <label for="content">Ecris ton commentaire</label>
                                 <textarea required class="container-fluid mt-2" type="text" name="content" id="content" placeholder="Salut !"></textarea>
 
@@ -229,24 +231,27 @@
                             </div> --}}
 
 
-                             <!-- ***************UPLOAD IMAGE*********** -->
-                     <div class="form-group row">
+                            <!-- ***************UPLOAD IMAGE*********** -->
+                            <div class="form-group row">
 
-                        <label for="image"
-                        class="col-md-4 col-form-label text-md-right">{{ __('image (facultative)') }}</label>
+                                <label for="image"
+                                    class="col-md-4 col-form-label text-md-right d-flex justify-content-end">{{ __('image (facultative)') }}</label>
 
-                        <div class="col-md-6">
-                            <input type="file" name="image" class="form-control">
-                        </div>
-                     </div>
+                                <div class="col-md-6">
+                                    <input type="file" name="image" class="form-control">
+                                </div>
+                            </div>
 
-                      <!-- ***************Bouton annuler et valider*********** -->
-                            <button class="btn btn-danger"
+                            <!-- ***************Bouton annuler et valider*********** -->
+
+                            <button type="submit" class="Modif-Valid btn m-2"></i>Valider</button>
+
+                            <button class="Supprimer btn m-2"
                                 onclick="document.getElementById('formulairecommentaire{{ $post->id }}').style.display = 'none'">
                                 Annuler
                             </button> {{-- masquer le formulaire de commentaire --}}
 
-                            <button type="submit" class=" valider btn btn-primary"></i>Valider</button>
+
                     </div>
                     </form>
 
@@ -254,7 +259,7 @@
                     <!-- ******************************************** boucle qui affiche les commentaires**********************************************-->
 
                     @foreach ($post->comments as $comment)
-                        <div class="card w-75 bg-warning mb-3">
+                        <div class="card-commentaire w-75 mb-3">
                             <div class="card-header row">
                                 <div class="d-flex flex-column align-items-center col-4">
                                     @if ($comment->user->image)
@@ -278,7 +283,7 @@
 
                             <div class="card-body">
                                 <p>{{ $comment->content }}</p>
-                                <img class="photo_commentaire" src="images/{{ $comment->image }} "
+                                <img class="photo_commentaire mb-3" src="images/{{ $comment->image }} "
                                     alt="image du commentaire">
                             </div>
 
@@ -294,7 +299,6 @@
                                         </a>
                                     @endcan
                                 </div>
-
 
 
                                 <!-- ********************************************************* Bouton supprimer le commentaire **************************************************-->

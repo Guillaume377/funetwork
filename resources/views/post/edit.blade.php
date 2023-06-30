@@ -14,7 +14,7 @@
             <div class="row modifpost">
 
 
-                <form class="col-4 mx-auto" action="{{ route('post.update', $post) }}" method="POST">
+                <form class="col-4 mx-auto" action="{{ route('post.update', $post) }}" enctype="multipart/form-data" {{--enctype = pour UPLOAD--}} method="POST">
                     @csrf
                     @method('PUT')
 
@@ -30,15 +30,20 @@
                             value="{{ $post->tags }}" id="tags">
                     </div>
 
-                    <div class="form-group p-3">
-                        <label for="image">Nouvelle image</label>
-                        <input required type="text" class="form-control" placeholder="modifier" name="image"
-                            value="{{ $post->image }}" id="image">
-                    </div>
+                     <!-- ***************UPLOAD IMAGE*********** -->
+                     <div class="form-group">
+
+                        <label for="image"
+                        class="col-md-4 col-form-label text-md-right">{{ __('image (facultative)') }}</label>
+
+                        <div class="col-md-6">
+                            <input type="file" name="image" class="upload form-control">
+                        </div>
+                     </div>
 
 
                     <!-- ********************** bouton valider ********************* -->
-                    <button type="submit" class="Modif-Valid btn">Valider</button>
+                    <button type="submit" class="Modif-Valid btn m-2">Valider</button>
                 </form>
 
             </div>

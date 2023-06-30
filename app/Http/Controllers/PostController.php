@@ -35,7 +35,7 @@ class PostController extends Controller
             // 3 syntaxes possibles pour accèder au contenu de $request
             'content' => $request->content, // syntaxe objet
             'tags' => $request['tags'],     // syntaxe tableau associatif
-            'image' => isset($request['image']) ? uploadImage($request['image']) : "null",   // autre syntaxe
+            'image' => isset($request['image']) ? uploadImage($request['image']) : null,   // autre syntaxe
             'user_id' => Auth::user()->id // j'accède à l'id du user connecté
         ]);
 
@@ -66,13 +66,16 @@ class PostController extends Controller
         $request->validate([
             'content' => 'required|max:1000',
             'tags' => 'required|max:50',
-            'image' => 'nullable|string'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif;svg|max:2048',
         ]);
 
         //on modifie les infos de l'utilisateur
         $post->content = $request->input('content');
         $post->tags = $request->input('tags');
-        $post->image = $request->input('image');
+        
+        if (isset($request['image'])){
+              $post->image = uploadImage($request['image']);
+        } 
 
         //on sauvegarde les changements en bdd
         $post->save();
@@ -93,7 +96,7 @@ class PostController extends Controller
         // ()les id doivent être identique)
         if (Auth::user()->id == $post->user_id) {
             $post->delete();
-            return redirect()->route('home')->with('post', 'Le post a bien été supprimé');
+            return redirect()->route('home')->with('message', 'Le message a bien été supprimé');
         } else {
             return redirect()->back()->withErrors(['erreur' => 'suppression du post impossible']);
         }

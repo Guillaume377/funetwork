@@ -8,9 +8,10 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" {{--enctype = pour UPLOAD--}}>
                         @csrf
 
+                        <!-- PSEUDO-->
                         <div class="row mb-3">
                             <label for="pseudo" class="col-md-4 col-form-label text-md-end">{{ __('pseudo') }}</label>
 
@@ -25,25 +26,23 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('image') }}</label>
+                       <!-- ***************UPLOAD IMAGE*********** -->
+                     <div class="form-group row">
 
-                            <div class="col-md-6">
-                                <input id="image" type="text" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" required autocomplete="image" autofocus>
+                        <label for="image"
+                        class=" facultative col-md-4 col-form-label text-md-right d-flex justify-content-end">{{ __('image (facultative)') }}</label>
 
-                                @error('image')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                        <div class="col-md-6">
+                            <input type="file" name="image" class="form-control">
                         </div>
+                     </div>
 
+                        <!--EMAIL-->
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('e-mail') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end mt-3">{{ __('e-mail') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input id="email" type="email" class="form-control mt-3 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -53,6 +52,7 @@
                             </div>
                         </div>
 
+                        <!--PASSWORD-->
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('mot de passe') }}</label>
 
@@ -67,6 +67,7 @@
                             </div>
                         </div>
 
+                        <!--CONFIRMER PASSWORD-->
                         <div class="row mb-3">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('confirmez le mot de passe') }}</label>
 
@@ -75,13 +76,15 @@
                             </div>
                         </div>
 
+                        <!--BOUTON VALIDER-->
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="Modif-Valid btn">
                                     {{ __('valider') }}
                                 </button>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>

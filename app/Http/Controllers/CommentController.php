@@ -34,14 +34,14 @@ class CommentController extends Controller
                                          // 3 syntaxes possibles pour accèder au contenu de $request
         'content' => $request->content, // syntaxe objet
         'tags' => $request['tags'],     // syntaxe tableau associatif
-        'image' => isset($request['image']) ? uploadImage($request['image']) : "null",   // autre syntaxe
+        'image' => isset($request['image']) ? uploadImage($request['image']) : null,   // autre syntaxe
         'post_id' => $request['post_id'], // j'accède à l'id du post concerné
         'user_id' => Auth::user()->id, // j'accède à l'id du user connecté
     ]);
 
 
     //on redirige sur la page précédente
-    return back()->with('commentaire', 'Le commentaire a bien été envoyé !');
+    return back()->with('message', 'Le commentaire a bien été envoyé !');
 }
 
 
@@ -64,13 +64,16 @@ class CommentController extends Controller
         $request->validate([
             'content' => 'required|max:1000',
             'tags' => 'required|max:50',
-            'image' => 'nullable|string'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif;svg|max:2048',
         ]);
 
          //on modifie les infos de l'utilisateur
          $comment->content = $request->input('content');
          $comment->tags = $request->input('tags');
-         $comment->image = $request->input('image');
+         
+         if (isset($request['image'])){
+            $comment->image = uploadImage($request['image']);
+      } 
  
          //on sauvegarde les changements en bdd
          $comment->save();
