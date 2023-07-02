@@ -1,3 +1,6 @@
+<!--===================================HEAD NAVBAR====================================-->
+
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -125,7 +128,7 @@
 
 
     <footer>
-        <div class="container mt-5 text-center">
+        <div class="footer p-4 text-center">
             <p>Copyright 2023 Funetwork</p>
         </div>
     </footer>

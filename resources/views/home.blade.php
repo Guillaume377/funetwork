@@ -1,3 +1,6 @@
+<!--===================================PAGE REGROUPANT LES POSTS ET COMMENTAIRES====================================-->
+
+
 @extends('layouts.app')
 
 <!--icon-->
@@ -10,9 +13,13 @@
             @if (Route::currentRouteName() == 'search')
                 <h1>Résultats de la recherche</h1>
             @else
-                <h1>Bienvenue sur votre réseau social <span>Funetwork!</h1>
+                <div class="accueil row">
+                    <h1 class="p-5">Bienvenue sur votre réseau social <span>Funetwork!</h1>
+                </div>
 
-                <h2 class="m-5">Poster un message</h2>
+                <div class="poster row">
+                    <h2 class="p-5">Poster un message</h2>
+                </div>
 
                 <!--********************************************** formulaire ajout message *************************************-->
 
@@ -42,8 +49,9 @@
                                 class="fa-solid fa-hashtag text-primary fa-2x me-2"></i></label>
 
                         <div class="col-md-6">
-                            <input id="tags tagspost" type="text" class="form-control @error('tags') is-invalid @enderror"
-                                name="tags" placeholder="bonjour hello" required autofocus>
+                            <input id="tags tagspost" type="text"
+                                class="form-control @error('tags') is-invalid @enderror" name="tags"
+                                placeholder="bonjour hello" required autofocus>
 
                             @error('tags')
                                 <span class="invalid-feedback" role="alert">
@@ -53,7 +61,7 @@
                         </div>
                     </div>
 
-                    <!-- ******************************************** input image post **********************************************--> --}}
+                    <!-- ******************************************** input image post **********************************************-->
 
                     <!-- ***************UPLOAD IMAGE*********** -->
                     <div class="form-group row">
@@ -82,7 +90,9 @@
             @else
                 <!-- s'il y a des résultats => foreach classique -->
 
-                <h2 class="m-5">Liste des messages</h2>
+                <div class="liste row">
+                    <h2 class="p-5">Liste des messages</h2>
+                </div>
 
                 <!-- *************************************** Boucle qui affiche les messages ***********************************************-->
                 @foreach ($posts as $post)

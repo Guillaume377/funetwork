@@ -6,13 +6,9 @@
 }
 
 body {
-    background-color: darkorange;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6),
-            rgba(0, 0, 0, 0.6)),
+    background-image: 
         url(../views/images/wallpaper.jpg);
-    background-size: 100%;
-    background-repeat: no-repeat;
-
+    background-size: 100%; 
 }
 
 h1,
@@ -20,6 +16,9 @@ h2 {
     padding-top: 5%;
     font-family: 'Sedgwick Ave Display', cursive;
     color: white;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 0, 0.6));
+    border-radius: 200px;
 }
 
 h3 {
@@ -40,7 +39,6 @@ p {
     box-shadow: 7px 5px 5px;
 }
 
-
 span {
     color: deepskyblue;
 }
@@ -49,8 +47,9 @@ span {
     margin-bottom: 40%;
 }
 
-footer {
+.footer {
     background-color: darkorange;
+   
 }
 
 /******** APP.BLADE.PHP/resources *******/
@@ -82,6 +81,17 @@ footer {
 
 
 /******** HOME.BLADE.PHP/resources *******/
+.accueil {
+    width:60%;
+}
+
+.poster {
+    width:50%;
+}
+
+.liste {
+    width: 50%;
+}
 
 .message {
     background-color: darkorange;
