@@ -12,7 +12,8 @@ body {
 }
 
 h1,
-h2 {
+h2,
+h3{
     padding-top: 5%;
     font-family: 'Sedgwick Ave Display', cursive;
     color: white;
@@ -21,8 +22,8 @@ h2 {
     border-radius: 200px;
 }
 
-h3 {
-    color: white;
+.titre {
+    padding : 0% 30% 0% 30%;
 }
 
 p {
@@ -82,15 +83,7 @@ span {
 
 /******** HOME.BLADE.PHP/resources *******/
 .accueil {
-    width:60%;
-}
-
-.poster {
-    width:50%;
-}
-
-.liste {
-    width: 50%;
+    padding: 0% 25% 0% 25%;
 }
 
 .message {
@@ -102,8 +95,22 @@ span {
     width: 60%;
 }
 
-.card-header {
+.pen {
+    color: white;
+}
+
+.hashtag {
+    color:white;
+}
+
+.card {
     background-color: deepskyblue;
+    border-radius: 15px;
+}
+
+.card-header-post {
+    background-color: darkorange;
+    border-radius: 15px;
 }
 
 .photo_user {
@@ -115,14 +122,14 @@ span {
     width: 40%;
 }
 
-.commentaire {
-    background-color: darkorange;
+.card-header-commentaire {
+    background-color: deepskyblue;
     border-radius: 15px;
 }
 
 .card-commentaire {
     background-color: darkorange;
-    border-radius: 20px;
+    border-radius: 15px;
 }
 
 .photo_commentaire {
@@ -160,7 +167,15 @@ span {
 .bienvenue {
     font-family: 'Sedgwick Ave Display', cursive;
     font-size: x-large;
-   
+}
+
+.date {
+    padding-top: 5%;
+    color: white;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.7));
+    border-radius: 200px;
+    /* width:80%; */
 }
 
 /******** EDIT.BLADE.PHP/post et comment*******/
@@ -169,6 +184,8 @@ span {
     background-color: darkorange;
     border-radius: 50%;
 }
+
+
 
 
 /******** EDIT.BLADE.PHP/user*******/

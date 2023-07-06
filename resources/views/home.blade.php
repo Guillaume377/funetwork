@@ -13,11 +13,11 @@
             @if (Route::currentRouteName() == 'search')
                 <h1>Résultats de la recherche</h1>
             @else
-                <div class="accueil row">
+                <div class="container accueil">
                     <h1 class="p-5">Bienvenue sur votre réseau social <span>Funetwork!</h1>
                 </div>
 
-                <div class="poster row">
+                <div class="container titre">
                     <h2 class="p-5">Poster un message</h2>
                 </div>
 
@@ -30,7 +30,7 @@
                     <!-- ******************************************* input content **********************************************-->
 
                     <div class="row mb-3">
-                        <i class="fas fa-pen-fancy text-primary fa-2x m-2"></i>
+                        <i class="pen fas fa-pen-fancy fa-2x m-2"></i>
                         <label for="content">Ecris ton message</label>
                         <textarea required class="container-fluid mt-2" type="text" name="content" id="content" placeholder="Salut !"></textarea>
 
@@ -46,7 +46,7 @@
 
                     <div class="row mb-3">
                         <label for="tags" class="col-md-4 col-form-label text-md-end"><i
-                                class="fa-solid fa-hashtag text-primary fa-2x me-2"></i></label>
+                                class="hashtag fa-solid fa-hashtag fa-2x me-2"></i></label>
 
                         <div class="col-md-6">
                             <input id="tags tagspost" type="text"
@@ -90,18 +90,19 @@
             @else
                 <!-- s'il y a des résultats => foreach classique -->
 
-                <div class="liste row">
+                <div class="container titre">
                     <h2 class="p-5">Liste des messages</h2>
                 </div>
 
                 <!-- *************************************** Boucle qui affiche les messages ***********************************************-->
                 @foreach ($posts as $post)
-                    <div class="card text-bg-primary mb-3">
-                        <div class="card-header row">
+                    <div class="card mb-3">
+                        <div class="card-header-post row pt-2">
                             <div class="d-flex flex-column align-items-center col-4">
                                 @if ($post->user->image)
                                     <img class="photo_user" src="images/{{ $post->user->image }} " alt="image profil">
                                 @endif
+
                                 <!------- lien vers le profil public ------->
                                 <a href="{{ route('users.show', $post->user) }}">
                                     <strong>{{ $post->user->pseudo }}</strong></a>
@@ -123,46 +124,45 @@
                             <img class="photo_message" src="images/{{ $post->image }} " alt="image du post">
                         </div>
 
-                    </div>
-
-
-                    <!-- *************************************** Bouton modifier => mène à la page de modification du message ***********************************************-->
-                    <div class="row col-4">
-                        {{-- @can('fonction de PostPolicy.php, class Post de AuthServiceProvider.php') --}}
-                        @can('update', $post)
-                            <a href="{{ route('post.edit', $post) }}">
-                                <button class="Modif-Valid btn mb-3">Modifier</button>
-                            </a>
-                        @endcan
-                    </div>
-
-
-                    <!-- *************************************** Bouton commenter => mène à la page commentaire ***********************************************-->
-                    <div class="row col-4">
-                        <div class="container">
-                            <button class=" Commenter btn mb-3"
-                                onclick="document.getElementById('formulairecommentaire{{ $post->id }}').style.display = 'block'">
-                                Commenter
-                            </button>
-                        </div>
-                    </div>
-
-
-                    <!-- ********************************************************* Bouton supprimer le post **************************************************-->
-                    <div class="row col-4">
-                        {{-- @can('fonction de PostPolicy.php, class Post de AuthServiceProvider.php') --}}
-                        @can('delete', $post)
-                            <div class="container text-center">
-                                <form action="{{ route('post.destroy', $post) }}" method="POST">
-                                    @csrf
-                                    @method ('DELETE')
-                                    <button type="submit" class="Supprimer btn">Supprimer</button>
-                                </form>
+                        <!-- *************************************** Bouton modifier => mène à la page de modification du message ***********************************************-->
+                        <div class="row">
+                            <div class="col-4">
+                                {{-- @can('fonction de PostPolicy.php, class Post de AuthServiceProvider.php') --}}
+                                @can('update', $post)
+                                    <a href="{{ route('post.edit', $post) }}">
+                                        <button class="Modif-Valid btn mb-3">Modifier</button>
+                                    </a>
+                                @endcan
                             </div>
-                        @endcan
+
+
+                            <!-- *************************************** Bouton commenter => mène à la page commentaire ***********************************************-->
+                            <div class="col-4">
+                                <div class="container">
+                                    <button class=" Commenter btn mb-3"
+                                        onclick="document.getElementById('formulairecommentaire{{ $post->id }}').style.display = 'block'">
+                                        Commenter
+                                    </button>
+                                </div>
+                            </div>
+
+
+                            <!-- ********************************************************* Bouton supprimer le post **************************************************-->
+                            <div class="col-4">
+                                {{-- @can('fonction de PostPolicy.php, class Post de AuthServiceProvider.php') --}}
+                                @can('delete', $post)
+                                    <div class="container text-center">
+                                        <form action="{{ route('post.destroy', $post) }}" method="POST">
+                                            @csrf
+                                            @method ('DELETE')
+                                            <button type="submit" class="Supprimer btn">Supprimer</button>
+                                        </form>
+                                    </div>
+                                @endcan
+                            </div>
+                        </div>
+
                     </div>
-
-
                     <!--******************************************************* formulaire ajout commentaire *************************************-->
 
 
@@ -238,7 +238,7 @@
 
                     @foreach ($post->comments as $comment)
                         <div class="card-commentaire w-75 mb-3">
-                            <div class="card-header row">
+                            <div class="card-header-commentaire row pt-3">
                                 <div class="d-flex flex-column align-items-center col-4">
                                     @if ($comment->user->image)
                                         <img class="photo_user" src="images/{{ $comment->user->image }} "
