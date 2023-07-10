@@ -96,8 +96,8 @@
 
                 <!-- *************************************** Boucle qui affiche les messages ***********************************************-->
                 @foreach ($posts as $post)
-                    <div class="card mb-3">
-                        <div class="card-header-post row pt-2">
+                    <div class="card card-post mb-3">
+                        <div class="card-header post row pt-2">
                             <div class="d-flex flex-column align-items-center col-4">
                                 @if ($post->user->image)
                                     <img class="photo_user" src="images/{{ $post->user->image }} " alt="image profil">
@@ -105,13 +105,14 @@
 
                                 <!------- lien vers le profil public ------->
                                 <a href="{{ route('users.show', $post->user) }}">
-                                    <strong>{{ $post->user->pseudo }}</strong></a>
+                                    <strong>{{ $post->user->pseudo }}</strong>
+                                </a>
                             </div>
 
                             <div class="col-4">
                                 <h4>#{{ implode(' #', explode(' ', $post->tags)) }} </h4>
                             </div>
-                            <div class="col-md-4 d-flex justify-content-around">
+                            <div class="poste-modifie col-4 d-flex justify-content-around">
                                 posté {{ $post->created_at->diffForHumans() }}
                                 @if ($post->created_at != $post->updated_at)
                                     <div class="row">modifié {{ $post->updated_at->diffForHumans() }}</div>
@@ -119,49 +120,49 @@
                             </div>
                         </div>
 
-                        <div class="card-body">
+                        <div class="card-body card-post ">
                             <p>{{ $post->content }}</p>
                             <img class="photo_message" src="images/{{ $post->image }} " alt="image du post">
-                        </div>
-
-                        <!-- *************************************** Bouton modifier => mène à la page de modification du message ***********************************************-->
-                        <div class="row">
-                            <div class="col-4">
-                                {{-- @can('fonction de PostPolicy.php, class Post de AuthServiceProvider.php') --}}
-                                @can('update', $post)
-                                    <a href="{{ route('post.edit', $post) }}">
-                                        <button class="Modif-Valid btn mb-3">Modifier</button>
-                                    </a>
-                                @endcan
-                            </div>
 
 
-                            <!-- *************************************** Bouton commenter => mène à la page commentaire ***********************************************-->
-                            <div class="col-4">
-                                <div class="container">
-                                    <button class=" Commenter btn mb-3"
-                                        onclick="document.getElementById('formulairecommentaire{{ $post->id }}').style.display = 'block'">
-                                        Commenter
-                                    </button>
+                            <!-- *************************************** Bouton modifier => mène à la page de modification du message ***********************************************-->
+                            <div class="row">
+                                <div class="col-4">
+                                    {{-- @can('fonction de PostPolicy.php, class Post de AuthServiceProvider.php') --}}
+                                    @can('update', $post)
+                                        <a href="{{ route('post.edit', $post) }}">
+                                            <button class="Modif-Valid btn my-3">Modifier</button>
+                                        </a>
+                                    @endcan
+                                </div>
+
+
+                                <!-- *************************************** Bouton commenter => mène à la page commentaire ***********************************************-->
+                                <div class="col-4">
+                                    <div class="container">
+                                        <button class=" Commenter btn my-3"
+                                            onclick="document.getElementById('formulairecommentaire{{ $post->id }}').style.display = 'block'">
+                                            Commenter
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                                <!-- ********************************************************* Bouton supprimer le post **************************************************-->
+                                <div class="col-4">
+                                    {{-- @can('fonction de PostPolicy.php, class Post de AuthServiceProvider.php') --}}
+                                    @can('delete', $post)
+                                        <div class="container text-center">
+                                            <form action="{{ route('post.destroy', $post) }}" method="POST">
+                                                @csrf
+                                                @method ('DELETE')
+                                                <button type="submit" class="Supprimer btn my-3">Supprimer</button>
+                                            </form>
+                                        </div>
+                                    @endcan
                                 </div>
                             </div>
-
-
-                            <!-- ********************************************************* Bouton supprimer le post **************************************************-->
-                            <div class="col-4">
-                                {{-- @can('fonction de PostPolicy.php, class Post de AuthServiceProvider.php') --}}
-                                @can('delete', $post)
-                                    <div class="container text-center">
-                                        <form action="{{ route('post.destroy', $post) }}" method="POST">
-                                            @csrf
-                                            @method ('DELETE')
-                                            <button type="submit" class="Supprimer btn">Supprimer</button>
-                                        </form>
-                                    </div>
-                                @endcan
-                            </div>
                         </div>
-
                     </div>
                     <!--******************************************************* formulaire ajout commentaire *************************************-->
 
@@ -175,7 +176,7 @@
                             <!-- ******************************************* input content commentaire **********************************************-->
 
                             <div class="row mb-3">
-                                <i class="fas fa-pen-fancy text-primary fa-2x m-2"></i>
+                                <i class="pen fas fa-pen-fancy fa-2x m-2"></i>
                                 <label for="content">Ecris ton commentaire</label>
                                 <textarea required class="container-fluid mt-2" type="text" name="content" id="content" placeholder="Salut !"></textarea>
 
@@ -191,7 +192,7 @@
 
                             <div class="row mb-3">
                                 <label for="tags" class="col-md-4 col-form-label text-md-end"><i
-                                        class="fa-solid fa-hashtag text-primary fa-2x me-2"></i></label>
+                                        class="hashtag fa-solid fa-hashtag fa-2x me-2"></i></label>
 
                                 <div class="col-md-6">
                                     <input id="tags" type="text"
@@ -237,21 +238,21 @@
                     <!-- ******************************************** boucle qui affiche les commentaires**********************************************-->
 
                     @foreach ($post->comments as $comment)
-                        <div class="card-commentaire w-75 mb-3">
-                            <div class="card-header-commentaire row pt-3">
+                        <div class="card card-ins-cnx-com w-75 mb-3">
+                            <div class="card-header ins-cnx-com row pt-3">
                                 <div class="d-flex flex-column align-items-center col-4">
                                     @if ($comment->user->image)
                                         <img class="photo_user" src="images/{{ $comment->user->image }} "
                                             alt="imagePost">
                                     @endif
-                                    posté par {{ $comment->user->pseudo }}
+                                    {{ $comment->user->pseudo }}
                                 </div>
 
                                 <div class="col-4">
                                     <h4>#{{ implode(' #', explode(' ', $comment->tags)) }} </h4>
                                 </div>
 
-                                <div class="col-md-4 d-flex justify-content-around">
+                                <div class="poste-modifie col-md-4 d-flex justify-content-around">
                                     posté {{ $comment->created_at->diffForHumans() }}
                                     @if ($comment->created_at != $comment->updated_at)
                                         <div>modifié {{ $comment->updated_at->diffForHumans() }}</div>
@@ -259,38 +260,39 @@
                                 </div>
                             </div>
 
-                            <div class="card-body">
+                            <div class="card-body card-ins-cnx-com">
                                 <p>{{ $comment->content }}</p>
                                 <img class="photo_commentaire mb-3" src="images/{{ $comment->image }} "
                                     alt="image du commentaire">
-                            </div>
 
 
 
-                            <!-- *************************************** Bouton modifier => mène à la page de modification du commentaire ***********************************************-->
-                            <div class="row">
-                                <div class="col-6">
-                                    {{-- @can('fonction de CommentPolicy.php, class Post de AuthServiceProvider.php') --}}
-                                    @can('update', $comment)
-                                        <a href="{{ route('comment.edit', $comment) }}">
-                                            <button class="Modif-Valid btn">Modifier</button>
-                                        </a>
-                                    @endcan
-                                </div>
+
+                                <!-- *************************************** Bouton modifier => mène à la page de modification du commentaire ***********************************************-->
+                                <div class="row">
+                                    <div class="col-6">
+                                        {{-- @can('fonction de CommentPolicy.php, class Post de AuthServiceProvider.php') --}}
+                                        @can('update', $comment)
+                                            <a href="{{ route('comment.edit', $comment) }}">
+                                                <button class="Modif-Valid btn">Modifier</button>
+                                            </a>
+                                        @endcan
+                                    </div>
 
 
-                                <!-- ********************************************************* Bouton supprimer le commentaire **************************************************-->
-                                <div class="col-6">
-                                    {{-- @can('fonction de CommentPolicy.php, class Post de AuthServiceProvider.php') --}}
-                                    @can('delete', $comment)
-                                        <div class="container text-center">
-                                            <form action="{{ route('comment.destroy', $comment) }}" method="POST">
-                                                @csrf
-                                                @method ('DELETE')
-                                                <button type="submit" class="Supprimer btn">Supprimer</button>
-                                            </form>
-                                        </div>
-                                    @endcan
+                                    <!-- ********************************************************* Bouton supprimer le commentaire **************************************************-->
+                                    <div class="col-6">
+                                        {{-- @can('fonction de CommentPolicy.php, class Post de AuthServiceProvider.php') --}}
+                                        @can('delete', $comment)
+                                            <div class="container text-center">
+                                                <form action="{{ route('comment.destroy', $comment) }}" method="POST">
+                                                    @csrf
+                                                    @method ('DELETE')
+                                                    <button type="submit" class="Supprimer btn">Supprimer</button>
+                                                </form>
+                                            </div>
+                                        @endcan
+                                    </div>
                                 </div>
                             </div>
                         </div>

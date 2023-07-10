@@ -4,9 +4,9 @@
 @extends ('layouts.app')
 
 @section('content')
-    <div class="container accueil">
+    <div class="container">
 
-        <div class ="text-center">
+        <div class ="text-center accueil">
             <h1><span>Discutez, partager</span> de bons moments <span>sur</span> le réseau social <span>Funetwork</span> !</h1>
             <h2 class="p-5">Les collègues, ce n'est pas qu'au boulot!</h2>
         </div>

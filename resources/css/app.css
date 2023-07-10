@@ -14,7 +14,7 @@ body {
 h1,
 h2,
 h3{
-    padding-top: 5%;
+    padding-top: 2%;
     font-family: 'Sedgwick Ave Display', cursive;
     color: white;
     background-image: linear-gradient(rgba(0, 0, 0, 0.6),
@@ -45,7 +45,7 @@ span {
 }
 
 .card {
-    margin-bottom: 40%;
+    margin-bottom: 5%!important;
 }
 
 .footer {
@@ -64,21 +64,33 @@ span {
 
 .btn-search {
     border-radius: 10px;
-    background-color: blue;
+    background-color: deepskyblue;
     color: white;
     font-family: 'Sedgwick Ave Display', cursive;
 }
 
 .btn-search:hover {
     background-color: white;
-    color: blue;
-    box-shadow: 7px 5px 5px blue;
+    color: deepskyblue;
+    box-shadow: 7px 5px 5px deepskyblue;
 }
 
 .Ins-con {
     margin-top: 50%;
     margin-bottom: 50%;
 }
+
+/******** LOGIN/REGISTER/HOME.BLADE.PHP/resources *******/
+
+.ins-cnx-com {
+    background-color: deepskyblue;
+}
+
+.card-ins-cnx-com {
+    background-color: darkorange;
+}
+
+
 
 
 /******** HOME.BLADE.PHP/resources *******/
@@ -87,6 +99,11 @@ span {
 }
 
 .message {
+    background-color: deepskyblue;
+    border-radius: 50%;
+}
+
+.commentaire {
     background-color: darkorange;
     border-radius: 50%;
 }
@@ -103,14 +120,12 @@ span {
     color:white;
 }
 
-.card {
-    background-color: deepskyblue;
-    border-radius: 15px;
+.post {
+    background-color: darkorange;
 }
 
-.card-header-post {
-    background-color: darkorange;
-    border-radius: 15px;
+.card-post {
+    background-color: deepskyblue;
 }
 
 .photo_user {
@@ -120,16 +135,6 @@ span {
 
 .photo_message {
     width: 40%;
-}
-
-.card-header-commentaire {
-    background-color: deepskyblue;
-    border-radius: 15px;
-}
-
-.card-commentaire {
-    background-color: darkorange;
-    border-radius: 15px;
 }
 
 .photo_commentaire {
@@ -163,6 +168,7 @@ span {
     box-shadow: red;
 }
 
+
 /******** PROFIL.BLADE.PHP*******/
 .bienvenue {
     font-family: 'Sedgwick Ave Display', cursive;
@@ -175,7 +181,6 @@ span {
     background-image: linear-gradient(rgba(0, 0, 0, 0.7),
     rgba(0, 0, 0, 0.7));
     border-radius: 200px;
-    /* width:80%; */
 }
 
 /******** EDIT.BLADE.PHP/post et comment*******/
@@ -183,6 +188,7 @@ span {
 .modifpost {
     background-color: darkorange;
     border-radius: 50%;
+    margin-bottom: 18%;
 }
 
 
@@ -190,9 +196,20 @@ span {
 
 /******** EDIT.BLADE.PHP/user*******/
 
+.mesinfos {
+    margin-bottom: 20%;
+}
+
+.card-mesinfos {
+    background-color: darkorange;
+}
+
 .upload {
     width:200%;
 }
+
+
+
 
 
 
@@ -208,6 +225,12 @@ span {
 .mesinfos {
     display:flex;
     flex-direction: column;
+    align-items: center;
+    
+}
+
+.card-mesinfos {
+   width:150%;
 }
 
 .photo_profil {
@@ -219,23 +242,35 @@ span {
     margin-right:13.5%;
 }
 
+
+
 }
 /*==============MEDIA QUERIES 767px=============*/
 
 
 @media screen and (max-width: 767px) {
 
+/* GENERAL */ 
+h1, h2, h3{
+    border-radius: 50px;
+    width: 100%;
+}
 
-   /* INDEX.BLADE.PHP */ 
+
+/* INDEX.BLADE.PHP */ 
 
 .inscription-connexion {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-content: center;
 }
 
 .Inscription {
     margin-bottom:5%;
+}
+
+.Ins-con {
+    margin-top: 0%;
 }
 
 
@@ -253,10 +288,13 @@ span {
     border-radius: 20px;
 }
 
+.commentaire {
+    border-radius: 20px;
+}
+
 #tagspost {
     width:100%
 }
-
 
 
 /* EDIT.BLADE.PHP/post et comment */
@@ -270,15 +308,38 @@ span {
 }
 
 #tags {
-    width:100%;
+    width:200%;
 }
 
 /* EDIT.BLADE.PHP/user */
+
+
+.upload {
+    width:100%;
+}
 
 .Supprimer {
     margin-right:6%;
 }
 
 
+/* PROFIL.BLADE */
+
+.poste-modifie {
+    font-size: 80%;
+}
+
 
 }
+
+
+/*==============MEDIA QUERIES 492px=============*/
+
+@media screen and (max-width: 492px) {
+
+    .modifpost {
+        margin-bottom: 30%;
+    }
+
+}
+

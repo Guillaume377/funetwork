@@ -128,7 +128,7 @@
 
 
     <footer>
-        <div class="footer p-4 text-center">
+        <div class="footer p-4 text-center fixed-bottom">
             <p>Copyright 2023 Funetwork</p>
         </div>
     </footer>
